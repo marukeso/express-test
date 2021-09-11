@@ -1,0 +1,22 @@
+const express = require('express');
+const app = express();
+
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.set('view engine', 'ejs');
+
+// app.get('/', (req, res) => {
+//   // res.sendStatus(200);
+//   // res.status(500).send('Hi');
+//   // res.json({message: 'error'});
+//   // res.download('server.js');
+//   res.render('index', { text: 'World!' });
+// });
+
+const userRouter = require('./routes/users');
+
+app.use('/users', userRouter);
+
+app.listen(3000);
